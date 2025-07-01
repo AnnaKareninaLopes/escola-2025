@@ -33,4 +33,7 @@ public class Offer {
     @OneToMany(mappedBy = "offer") //Resource
     private List<Resource> resources = new java.util.ArrayList<>();
 
+    @OneToMany(mappedBy = "offer") //Topic
+    private List<Topic> topics = new java.util.ArrayList<>();
+
 }
