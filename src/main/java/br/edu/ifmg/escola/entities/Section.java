@@ -1,6 +1,5 @@
 package br.edu.ifmg.escola.entities;
 
-import br.edu.ifmg.escola.constants.ResourceType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,13 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name="tb_resource")
-public class Resource {
-
+@Table(name = "tb_section")
+public class Section {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +25,14 @@ public class Resource {
     private Integer position;
     private String imgUri;
 
-    @Enumerated(EnumType.STRING)//ORDINAL
-    private ResourceType resourceType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resource_id")
+    private Resource resource;
 
-    @ManyToOne
-    @JoinColumn(name = "offer_id")
-    private Offer offer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prerequisite_id")
+    private Section prerequisite;
 
-    @OneToMany(mappedBy = "resource")
-    List<Section> sections = new ArrayList<>();
-
+    @OneToMany(mappedBy = "section")
+    List<Lesson> lessons = new ArrayList<>();
 }

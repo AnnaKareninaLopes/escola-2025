@@ -30,7 +30,7 @@ public class Offer {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @OneToMany(mappedBy = "offer")
+    @OneToMany(mappedBy = "offer") //Resource
     private List<Resource> resources = new java.util.ArrayList<>();
 
 }
